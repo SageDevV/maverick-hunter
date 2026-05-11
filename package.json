@@ -1,0 +1,21 @@
+{
+  "name": "maverick-hunter",
+  "version": "1.0.0",
+  "description": "Autonomous AI task execution system — reads QuestLog tasks from Firestore and routes them to the appropriate AI CLI (Claude, Gemini, Codex)",
+  "type": "module",
+  "main": "src/index.mjs",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "start:once": "node src/index.mjs --once",
+    "start:dry": "node src/index.mjs --dry-run",
+    "install-scheduler": "powershell -ExecutionPolicy Bypass -File scripts/install-scheduler.ps1",
+    "uninstall-scheduler": "powershell -ExecutionPolicy Bypass -File scripts/uninstall-scheduler.ps1"
+  },
+  "keywords": ["ai", "automation", "questlog", "firestore"],
+  "author": "Maverick Hunter System",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "firebase-admin": "^13.8.0"
+  }
+}
