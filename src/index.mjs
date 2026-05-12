@@ -65,16 +65,25 @@ async function processTask(task, userDocRef) {
   let workDir, branch, projectName;
 
   try {
-    // 1. Prepare Git workspace
-    const workspace = prepareWorkspace(task);
-    workDir = workspace.workDir;
-    branch = workspace.branch;
-    projectName = workspace.projectName;
+    // 1. Get the executor first to check if Git is needed
+    const executor = routeTask(task.agentLabel);
+    const needsGit = executor.requiresGit !== false;
 
-    log.info(`  📁 Workspace: ${workDir}`);
-    log.info(`  🌿 Branch: ${branch}`);
+    // 2. Prepare Git workspace (only for code-based executors)
+    if (needsGit) {
+      const workspace = prepareWorkspace(task);
+      workDir = workspace.workDir;
+      branch = workspace.branch;
+      projectName = workspace.projectName;
+      log.info(`  📁 Workspace: ${workDir}`);
+      log.info(`  🌿 Branch: ${branch}`);
+    } else {
+      log.info(`  🌐 ${executor.name} executor — no Git workspace needed`);
+      branch = 'N/A';
+      projectName = 'N/A';
+    }
 
-    // 2. Update Firestore → running
+    // 3. Update Firestore → running
     await updateTaskStatus(userDocRef, task.id, {
       maverickStatus: 'running',
       maverickStartedAt: Date.now(),
@@ -82,17 +91,16 @@ async function processTask(task, userDocRef) {
       maverickProject: projectName,
     });
 
-    // 3. Send Telegram notification
+    // 4. Send Telegram notification
     await notifyTaskStarted(task, branch);
 
-    // 4. Route to correct executor and run
-    const executor = routeTask(task.agentLabel);
+    // 5. Execute
     const result = await executor.execute(task.description, workDir, task.id);
 
-    // 5. Handle result
+    // 6. Handle result
     if (result.success) {
-      // Commit changes to git
-      if (!CONFIG.DRY_RUN) {
+      // Commit changes to git (only for code-based executors)
+      if (needsGit && !CONFIG.DRY_RUN) {
         commitChanges(workDir, task);
       }
 

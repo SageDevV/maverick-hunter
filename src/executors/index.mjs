@@ -8,6 +8,7 @@
 import { ClaudeExecutor } from './claude-executor.mjs';
 import { GeminiExecutor } from './gemini-executor.mjs';
 import { CodexExecutor } from './codex-executor.mjs';
+import { GammaExecutor } from './gamma-executor.mjs';
 
 /** @type {Map<string, import('./base-executor.mjs').BaseExecutor>} */
 const EXECUTOR_REGISTRY = new Map();
@@ -16,8 +17,7 @@ const EXECUTOR_REGISTRY = new Map();
 EXECUTOR_REGISTRY.set('Claude', new ClaudeExecutor());
 EXECUTOR_REGISTRY.set('Gemini', new GeminiExecutor());
 EXECUTOR_REGISTRY.set('Codex',  new CodexExecutor());
-
-// Future: EXECUTOR_REGISTRY.set('Kiro', new KiroExecutor());
+EXECUTOR_REGISTRY.set('Gamma',  new GammaExecutor());
 
 /**
  * Get the executor for a given agent label.

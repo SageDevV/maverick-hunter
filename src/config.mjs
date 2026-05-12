@@ -26,8 +26,11 @@ export const CONFIG = Object.freeze({
   WORKSPACE_DIR: process.env.WORKSPACE_DIR || 'C:\\Users\\usuario\\Documents\\Workspace.AI\\Autonomus',
 
   // ── Accepted Agent Labels ──
-  ACCEPTED_LABELS: ['Claude', 'Codex', 'Gemini'],
-  // Future: add 'Kiro' here when ready
+  ACCEPTED_LABELS: ['Claude', 'Codex', 'Gemini', 'Gamma'],
+
+  // ── Gamma (Browser Automation) ──
+  CHROME_PROFILE_DIR: process.env.CHROME_PROFILE_DIR || '',
+  GAMMA_GENERATION_WAIT_MS: parseInt(process.env.GAMMA_GENERATION_WAIT_MS || '300000', 10), // 5 min
 
   // ── Telegram ──
   TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || '',
