@@ -8,7 +8,6 @@
     "start": "node src/index.mjs",
     "start:once": "node src/index.mjs --once",
     "start:dry": "node src/index.mjs --dry-run",
-    "gamma:login": "node scripts/gamma-login.mjs",
     "install-scheduler": "powershell -ExecutionPolicy Bypass -File scripts/install-scheduler.ps1",
     "uninstall-scheduler": "powershell -ExecutionPolicy Bypass -File scripts/uninstall-scheduler.ps1"
   },
@@ -23,6 +22,7 @@
   "dependencies": {
     "dotenv": "^17.4.2",
     "firebase-admin": "^13.8.0",
+    "node-notifier": "^10.0.1",
     "puppeteer": "^24.43.1"
   }
 }

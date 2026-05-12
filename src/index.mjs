@@ -22,6 +22,7 @@ import { updateTaskStatus } from './firestore/writer.mjs';
 import { routeTask } from './router/task-router.mjs';
 import { prepareWorkspace, commitChanges } from './git/git-manager.mjs';
 import { log } from './logger/logger.mjs';
+import notifier from 'node-notifier';
 import {
   notifySystemStarted,
   notifyTaskStarted,
@@ -94,6 +95,16 @@ async function processTask(task, userDocRef) {
     // 4. Send Telegram notification
     await notifyTaskStarted(task, branch);
 
+    // 4.5 Send Windows system tray notification
+    notifier.notify({
+      title: 'Maverick Hunter Executando',
+      message: `Iniciando automação: [${task.agentLabel}] ${task.title}\nExecutado em segundo plano pelo Windows.`,
+      icon: path.resolve('assets/icon.png'), // Will fallback to default if not exists
+      appID: 'Maverick Hunter',
+      sound: true,
+      wait: false
+    });
+
     // 5. Execute
     const result = await executor.execute(task.description, workDir, task.id);
 
@@ -108,6 +119,8 @@ async function processTask(task, userDocRef) {
         maverickStatus: 'completed',
         maverickCompletedAt: Date.now(),
         maverickLog: result.output.slice(-500),
+        completed: true,
+        completedAt: Date.now(),
       });
 
       await notifyTaskCompleted(task, result.durationMs, branch);
