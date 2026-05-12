@@ -1,3 +1,6 @@
-2026/05/12-09:20:46.262 73cc Reusing MANIFEST C:\Users\usuario\Documents\Workspace.AI\Autonomus\maverick-hunter\chrome-profile\Default\Local Storage\leveldb/MANIFEST-000001
-2026/05/12-09:20:46.267 73cc Recovering log #3
-2026/05/12-09:20:46.268 73cc Reusing old log C:\Users\usuario\Documents\Workspace.AI\Autonomus\maverick-hunter\chrome-profile\Default\Local Storage\leveldb/000003.log 
+2026/05/12-11:40:18.339 3c90 Reusing MANIFEST c:\Users\usuario\Documents\Workspace.AI\Autonomus\maverick-hunter\chrome-profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/05/12-11:40:18.345 3c90 Recovering log #19
+2026/05/12-11:40:18.347 3c90 Reusing old log c:\Users\usuario\Documents\Workspace.AI\Autonomus\maverick-hunter\chrome-profile\Default\Local Storage\leveldb/000019.log 
+2026/05/12-11:43:18.517 2f48 Level-0 table #24: started
+2026/05/12-11:43:18.524 2f48 Level-0 table #24: 25613 bytes OK
+2026/05/12-11:43:18.529 2f48 Delete type=0 #19

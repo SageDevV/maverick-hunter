@@ -1,2 +1,15 @@
-2026/05/12-09:16:01.337 76c4 Creating DB C:\Users\usuario\Documents\Workspace.AI\Autonomus\maverick-hunter\chrome-profile\Default\Local Storage\leveldb since it was missing.
-2026/05/12-09:16:01.360 76c4 Reusing MANIFEST C:\Users\usuario\Documents\Workspace.AI\Autonomus\maverick-hunter\chrome-profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/05/12-11:13:05.091 3974 Reusing MANIFEST c:\Users\usuario\Documents\Workspace.AI\Autonomus\maverick-hunter\chrome-profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/05/12-11:13:05.095 3974 Recovering log #16
+2026/05/12-11:13:05.097 3974 Reusing old log c:\Users\usuario\Documents\Workspace.AI\Autonomus\maverick-hunter\chrome-profile\Default\Local Storage\leveldb/000016.log 
+2026/05/12-11:16:05.389 4f88 Level-0 table #20: started
+2026/05/12-11:16:05.394 4f88 Level-0 table #20: 32268 bytes OK
+2026/05/12-11:16:05.398 4f88 Delete type=0 #16
+2026/05/12-11:16:05.398 4f88 Compacting 4@0 + 1@1 files
+2026/05/12-11:16:05.406 4f88 Generated table #21@0: 21 keys, 16142 bytes
+2026/05/12-11:16:05.406 4f88 Compacted 4@0 + 1@1 files => 16142 bytes
+2026/05/12-11:16:05.410 4f88 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/05/12-11:16:05.410 4f88 Delete type=2 #8
+2026/05/12-11:16:05.411 4f88 Delete type=2 #11
+2026/05/12-11:16:05.411 4f88 Delete type=2 #14
+2026/05/12-11:16:05.411 4f88 Delete type=2 #17
+2026/05/12-11:16:05.411 4f88 Delete type=2 #20
