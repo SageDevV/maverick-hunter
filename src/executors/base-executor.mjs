@@ -76,7 +76,19 @@ export class BaseExecutor {
       let output = '';
       let killed = false;
 
-      const proc = spawn(this.command, args, {
+      // When using shell: true, Node concatenates the args array into a space-separated string.
+      // We must explicitly quote arguments that contain spaces to prevent them from splitting.
+      const escapedArgs = args.map(arg => {
+        if (typeof arg === 'string' && (arg.includes(' ') || arg.includes('\n'))) {
+          return `"${arg.replace(/"/g, '\\"')}"`;
+        }
+        return arg;
+      });
+
+      // Pass the fully constructed command string to avoid the Node.js DeprecationWarning [DEP0190]
+      const fullCommand = `${this.command} ${escapedArgs.join(' ')}`;
+
+      const proc = spawn(fullCommand, [], {
         cwd: workDir,
         env,
         shell: true,
