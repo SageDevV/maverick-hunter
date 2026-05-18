@@ -42,12 +42,21 @@ export async function fetchPendingTasks() {
     const quests = data.quests || [];
     log.debug(`📊 Total quests for ${userEmail}: ${quests.length}`);
 
-    const pendingTasks = quests.filter(q =>
-      !q.completed &&
-      CONFIG.ACCEPTED_LABELS.includes(q.agentLabel) &&
-      q.maverickStatus !== 'completed' &&
-      q.maverickStatus !== 'running'
-    );
+    const now = new Date();
+    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const endOfToday = startOfToday + 24 * 60 * 60 * 1000 - 1;
+
+    const pendingTasks = quests.filter(q => {
+      if (q.completed) return false;
+      if (!CONFIG.ACCEPTED_LABELS.includes(q.agentLabel)) return false;
+      if (q.maverickStatus === 'completed' || q.maverickStatus === 'running') return false;
+
+      // Only execute tasks scheduled for today or earlier
+      if (q.scheduledDate !== undefined && q.scheduledDate !== null) {
+        return q.scheduledDate <= endOfToday;
+      }
+      return true; // Fallback for quests without scheduledDate
+    });
 
     // Respect max tasks per cycle
     const limited = pendingTasks.slice(0, CONFIG.MAX_TASKS_PER_CYCLE);
